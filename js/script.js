@@ -4,10 +4,6 @@ function titleClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
   event.preventDefault();
-  console.log('clickedElement (with plus): ' + clickedElement);
-  console.log('Link was clicked!');
-  console.log(event);
-
 
   /* [DONE] remove class 'active' from all article links  */
   const activeLinks = document.querySelectorAll('.titles a.active');
@@ -15,27 +11,22 @@ function titleClickHandler(event){
     activeLink.classList.remove('active');
   }
    /* [DONE] add class 'active' to the clicked link */
-   clickedElement.classList.add('active');
-   console.log('clickedElement:', clickedElement);
+  clickedElement.classList.add('active');
 
    /* [DONE]  remove class 'active' from all articles */
-   const  activeArticles = document.querySelectorAll('.posts article.active');
+  const  activeArticles = document.querySelectorAll('.posts article.active');
    for (let activeArticle of activeArticles){
     activeArticle.classList.remove('active')
    }
 
   /* [DONE] get 'href' attribute from the clicked link */
   const linkHref = clickedElement.getAttribute('href');
-  console.log('pobrany href to: ', linkHref)
-
 
   /* [DONE] find the correct article using the selector (value of 'href' attribute) */
   const targetArticle = document.querySelector(linkHref);
-  console.log ('Szukany artykuł to: ', targetArticle)
 
   /* [DONE] add class 'active' to the correct article */
   targetArticle.classList.add('active')
-  console.log('active: ', targetArticle);
 }
 
 const links = document.querySelectorAll('.titles a');
@@ -43,3 +34,34 @@ const links = document.querySelectorAll('.titles a');
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
+
+const optArticleSelector = '.post',
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
+  function clearMessages(){
+    const titleList = document.querySelector(optTitleListSelector); 
+    titleList.innerHTML = '';
+  }
+ 
+function generateTitleLinks(){
+
+   /*[IN PROGRESS] remove contents of titleList */
+  const titleList = document.querySelector(optTitleListSelector);
+  clearMessages();
+
+
+  /* for each article */
+
+    /* get the article id */
+
+    /* find the title element */
+
+    /* get the title from the title element */
+
+    /* create HTML of the link */
+
+    /* insert link into titleList */
+
+}
+
+generateTitleLinks();
