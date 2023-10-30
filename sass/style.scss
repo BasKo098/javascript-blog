@@ -51,7 +51,6 @@ body {
 .sidebar {
   flex: 1 0 0;
 }
-
 .posts {
   flex: 2 0 0;
 }
@@ -62,6 +61,8 @@ body {
   padding: 40px;
   border: 1px solid $color-dark;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Logo */
@@ -102,10 +103,21 @@ body {
 /* Post */
 
 .post {
-  display: none;
-  &.active {
-    display: block;
-  }
+position: absolute;
+flex-direction: column;
+z-index: 1;
+display: flex;
+opacity: 0;
+transition: 0.5s;
+max-width: 470px;
+&.active {
+position: relative;
+display: flex;
+z-index: 2;
+opacity: 1;
+transition: opacity 0.5s;
+max-width: 470px;
+}
 }
 
 .post-author {
