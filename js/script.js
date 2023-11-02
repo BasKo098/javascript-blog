@@ -16,7 +16,7 @@ function titleClickHandler(event){
   /* [DONE]  remove class 'active' from all articles */
   const  activeArticles = document.querySelectorAll('.posts article.active');
   for (let activeArticle of activeArticles){
-    activeArticle.classList.remove('active')
+    activeArticle.classList.remove('active');
   }
 
   /* [DONE] get 'href' attribute from the clicked link */
@@ -26,12 +26,12 @@ function titleClickHandler(event){
   const targetArticle = document.querySelector(linkHref);
   
   /* [DONE] add class 'active' to the correct article */
-  targetArticle.classList.add('active')
+  targetArticle.classList.add('active');
 }
 
 const optArticleSelector = '.post',
-optTitleSelector = '.post-title',
-optTitleListSelector = '.titles';
+  optTitleSelector = '.post-title',
+  optTitleListSelector = '.titles';
 
 function clearMessages(){
   const titleList = document.querySelector(optTitleListSelector); 

@@ -8,14 +8,15 @@
     "init:dirs": "mkdirp sass css vendor images js",
     "init:files": "touch README.md index.html sass/style.scss js/script.js",
     "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
-    "test": "npm run test:html",
+    "test": "npm-run-all test:*",
     "test:html": "html-validate *.html",
+    "test:js": "eslint js/",
     "build": "npm-run-all build:* test",
     "build:sass": "sass --style=compressed --no-source-map sass:css",
     "build:autoprefixer": "postcss css/*.css --use autoprefixer -d css",
     "build-dev": "npm-run-all build-dev:sass build:autoprefixer",
     "build-dev:sass": "sass --style=expanded --source-map sass:css",
-    "watch": "npm-run-all build build-dev -p watch:*",
+    "watch": "npm-run-all build:* build-dev -p watch:*",
     "watch:browsersync": "browser-sync start --server --files \"css/*.css\" \"*.html\" \"js/*.js\"",
     "watch:sassprefixer": "onchange sass/*.scss -- npm run build-dev"
   },
@@ -25,6 +26,7 @@
   "devDependencies": {
     "autoprefixer": "^10.2.4",
     "browser-sync": "^2.26.3",
+    "eslint": "^8.52.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.0",
     "html-validate": "^8.7.0",
@@ -35,8 +37,5 @@
     "postcss-cli": "^8.3.1",
     "prettier": "^3.0.0-alpha.6",
     "sass": "^1.44.0"
-  },
-  "dependencies": {
-    "eslint": "^8.52.0"
   }
 }
