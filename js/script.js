@@ -33,7 +33,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optAuthorListSelector = '.post-author';
+  optAuthorListSelector = '.post-author',
+  optTagsListSelector = '.tags.list';
 
 function clearMessages(){
   const titleList = document.querySelector(optTitleListSelector);
@@ -78,9 +79,10 @@ function generateTitleLinks(customSelector = ''){
   }
 }
 
-generateTitleLinks();
-
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty array */
+  let allTags = [];
+
   /* [DONE] find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -89,15 +91,18 @@ function generateTags(){
 
     /* [DONE] find tags wrapper*/
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
+    console.log('te tags Wrapper ' + tagsWrapper);
 
     /* [DONE] make html variable with empty string*/
     let html = '';
 
     /* [DONE] get tags from data-tags attribute*/
     const articleTags = article.getAttribute('data-tags');
+    console.log('te artykuł tags '+ articleTags);
 
     /* [DONE] split tags into array*/
     const articleTagsArray = articleTags.split(', ');
+    console.log('te article array ' + articleTagsArray);
 
     /* [DONE] START LOOP: for each tag */
     for (let tag of articleTagsArray){
@@ -105,13 +110,25 @@ function generateTags(){
       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag  + '</a></li>';
       /* [DONE] add generated code to html variable */
       html += linkHTML;
-    /* [DONE] END LOOP: for each tag */
+      /* [DONE] END LOOP: for each tag */
+      /* [NEW] check if this link is NOT already in allTags */
+      if (allTags.indexOf(linkHTML) == -1){
+        /* [NEW] add generated code to allTags array */
+        allTags.push(linkHTML);
+      }
+      console.log('te tag ' + allTags);
     }
     /* [DONE] insert HTML of all the links into the tags wrapper */
     tagsWrapper.insertAdjacentHTML('beforeend', html);
 
   /* [DONE] END LOOP: for every article: */
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector(optTagsListSelector);
+
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
+  console.log('teeeeen tagList ' + allTags);
 }
 
 generateTags();
