@@ -32,7 +32,8 @@ function titleClickHandler(event){
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optAuthorListSelector = '.post .post-author';
 
 function clearMessages(){
   const titleList = document.querySelector(optTitleListSelector);
@@ -171,3 +172,26 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
+
+
+
+function generateAuthors() {
+  const articles = document.querySelectorAll(optArticleSelector);
+  for (let article of articles) {
+    const authorWrapper = article.querySelector(optAuthorListSelector);
+    let html = '';
+    const authorTags = article.getAttribute('data-author');
+    console.log('autor tag ' + authorTags);
+    const linkHTML = '<a href="#">' + authorTags + '</a>';
+    console.log('ten link ' + linkHTML);
+    html += linkHTML;
+
+    /*[PROBLEM] nie wiem dlaczego nie "wstrzykuje mi się wartość linku html do post autor"*/
+
+    authorWrapper.insertAdjacentHTML('beforeend', html);
+  }
+}
+
+generateAuthors();
+
+
