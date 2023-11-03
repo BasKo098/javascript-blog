@@ -33,7 +33,7 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optAuthorListSelector = '.post .post-author';
+  optAuthorListSelector = '.post-author';
 
 function clearMessages(){
   const titleList = document.querySelector(optTitleListSelector);
@@ -44,9 +44,8 @@ function generateTitleLinks(customSelector = ''){
 
   /*[DONE] remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
-  clearMessages();
-
   const titleItems = document.querySelectorAll('.list .titles li');
+
   for(let item of titleItems){
     item.remove();
   }
@@ -117,7 +116,6 @@ function generateTags(){
 
 generateTags();
 
-
 function tagClickHandler(event){
   /* [DONE] prevent default action for this event */
   event.preventDefault();
@@ -126,15 +124,12 @@ function tagClickHandler(event){
 
   /* [DONE] make a new constant "href" and read the attribute "href" of the clicked element */
   const href = clickedElement.getAttribute('href');
-  console.log('to ten const href ' + href);
 
   /* [DONE] make a new constant "tag" and extract tag from the "href" constant */
   const tag = href.replace('#tag-', '');
-  console.log ( 'ten tag równy href ' + tag);
 
   /* [DONE] find all tag links with class active */
   const activeTagLinks = document.querySelectorAll('a.active[href^="#tag-"]');
-  console.log ('ten activeTagLinks' + activeTagLinks);
 
   /* [DONE] START LOOP: for each active tag link */
   /* [DONE] remove class active */
@@ -145,7 +140,6 @@ function tagClickHandler(event){
 
   /* [DONE] find all tag links with "href" attribute equal to the "href" constant */
   const foundLinks = document.querySelectorAll('a[href="' + href + '"]');
-  console.log('tot ten found Links ' + foundLinks);
 
   /* [DONE] START LOOP: for each found tag link */
   /* [DONE] add class active */
@@ -161,7 +155,6 @@ function tagClickHandler(event){
 function addClickListenersToTags(){
   /* [DONE] find all links to tags */
   const foundTagLinks = document.querySelectorAll('a[href^="#tag-"]');
-  console.log('ten found tags ' + foundTagLinks);
 
   /* [DONE] START LOOP: for each link */
   /* [DONE] add tagClickHandler as event listener for that link */
@@ -173,25 +166,49 @@ function addClickListenersToTags(){
 
 addClickListenersToTags();
 
-
-
+/*[DONE]*/
 function generateAuthors() {
   const articles = document.querySelectorAll(optArticleSelector);
+
   for (let article of articles) {
     const authorWrapper = article.querySelector(optAuthorListSelector);
     let html = '';
+    /*AUTHOR LIST*/
     const authorTags = article.getAttribute('data-author');
-    console.log('autor tag ' + authorTags);
-    const linkHTML = '<a href="#">' + authorTags + '</a>';
-    console.log('ten link ' + linkHTML);
+    const linkHTML = '<a href="#author-' + authorTags + '">' + authorTags + '</a>';
     html += linkHTML;
-
-    /*[PROBLEM] nie wiem dlaczego nie "wstrzykuje mi się wartość linku html do post autor"*/
-
     authorWrapper.insertAdjacentHTML('beforeend', html);
   }
 }
 
 generateAuthors();
 
+function addClickListenersToAuthors(){
+  const foundAutorsLinks = document.querySelectorAll(('a[href^="#"]'));
+  for (let link of foundAutorsLinks) {
+    link.addEventListener('click', authorClickHandler);
+  }
+}
+addClickListenersToAuthors();
+
+
+function authorClickHandler(event){
+  event.preventDefault();
+  const clickedElement = this;
+  const href = clickedElement.getAttribute('href');
+  const author = href.replace('#', '');
+  const activeAuthorList = document.querySelectorAll('a.active[href^="#author-"]');
+
+  for (let authorLink of activeAuthorList) {
+    authorLink.classList.remove('active');
+  }
+
+  const foundAuthor = document.querySelectorAll('a[href="' + author + '"]');
+
+  for (let author of foundAuthor){
+    author.classList.add('active');
+  }
+
+  generateTitleLinks('[data-tags="' + author + '"]');
+}
 
