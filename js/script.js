@@ -28,6 +28,10 @@ function titleClickHandler(event){
   /* [DONE] add class 'active' to the correct article */
   targetArticle.classList.add('active');
 }
+const links = document.querySelectorAll('.titles a');
+for(let link of links){
+  link.addEventListener('click', titleClickHandler);
+}
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
@@ -41,9 +45,8 @@ const optArticleSelector = '.post',
 
 function generateTitleLinks(customSelector = ''){
 
-  /*[DONE] remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
-
+  /*[DONE] remove contents of titleList */
   const titleItems = document.querySelectorAll('.list .titles li');
   for(let item of titleItems){
     item.remove();
@@ -60,6 +63,7 @@ function generateTitleLinks(customSelector = ''){
     /* [DONE] find the title element */
     /* [DONE] get the title from the title element */
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    console.log(articleTitle);
 
     /* [DONE] create HTML of the link */
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
@@ -78,6 +82,7 @@ function generateTitleLinks(customSelector = ''){
   console.log('my custom selector:', customSelector);
 }
 
+
 function calculateTagsParam(tags){
   const params = {
     min: 0,
@@ -85,7 +90,7 @@ function calculateTagsParam(tags){
   };
 
   for (let tag in tags){
-    console.log(tag + ' is used ' + tags[tag] + ' times');
+    //*console.log(tag + ' is used ' + tags[tag] + ' times');
     params.max = Math.max(tags[tag], params.max);
     params.min = Math.min(tags[tag], params.min);
   }
@@ -137,12 +142,9 @@ function generateTags(){
       } else {
         allTags[tag]++;
       }
-      console.log('all tag ');
-      console.log( allTags);
     }
     /* [DONE] insert HTML of all the links into the tags wrapper */
     tagsWrapper.innerHTML = html;
-
   /* [DONE] END LOOP: for every article: */
   }
   /* [NEW] find list of tags in right column */
@@ -156,15 +158,12 @@ function generateTags(){
   for(let tag in allTags){
     /*[NEW] generate code of a link and add it to allTagsHTML: */
     const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) +' " href="#tag-' + tag +'">'  + tag + ' (' + allTags[tag] + ')</a></li>';
-    //const linkHTML = '<li><a class="" href="#tag-' + tag + '">' + tag + ' (' + allTags[tag] + ')</a></li>';
     allTagsHTML += tagLinkHTML;
   }
   /*[NEW] END LOOP: for each tag in allTags: */
 
   /*[NEW] add html from allTagsHTML to tagList */
   tagList.innerHTML = allTagsHTML;
-  console.log('tag list');
-  console.log(tagList);
 }
 
 generateTags();
@@ -203,7 +202,7 @@ function tagClickHandler(event){
   }
 
   /* [DONE] execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks('[data-tags~="' + tag + '"]');
+  generateTitleLinks('[data-tags="' + tag + '"]'); //generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 
 function addClickListenersToTags(){
@@ -239,24 +238,16 @@ function generateAuthors() {
       allAuthors[authorTags]++;
     }
   }
-  console.log('allAuthors ');
-  console.log(allAuthors);
   const authorList = document.querySelector(optAuthorListSelector);
   const authorsParams = calculateTagsParam(allAuthors);
-  console.log('authorsParams: ', authorsParams);
   let allAuthorsHTML = '';
   for(let author in allAuthors) {
     const authorsLinkHTML = '<li><a class="' + calculateTagClass(allAuthors[author], authorsParams) +' " href="#tag-' + author +'">'  + author +  '(' + allAuthors[author] + ')</a></li>';
-    console.log('authorsLinkHTML: ', authorsLinkHTML);
     allAuthorsHTML += authorsLinkHTML;
     authorList.innerHTML = allAuthorsHTML;
 
   }
   //authorList.innerHTML = allAuthorsHTML;
-
-
-
-
 }
 generateAuthors();
 
@@ -271,6 +262,7 @@ addClickListenersToAuthors();
 function authorClickHandler(event){
   event.preventDefault();
   const clickedElement = this;
+  event.preventDefault();
   const href = clickedElement.getAttribute('href');
   const author = href.replace('#author-', '');
   const activeAuthorList = document.querySelectorAll('a.active[href^="#author-"]');
