@@ -52,6 +52,7 @@ function generateTitleLinks(customSelector = ''){
   for(let item of titleItems){
     item.remove();
   }
+  console.log('custom ' + customSelector);
 
   /* [DONE] for each article */
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
