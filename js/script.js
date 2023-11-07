@@ -54,7 +54,6 @@ function generateTitleLinks(customSelector = '') {
     html = html + linkHTML;
     titleList.innerHTML = html;
   }
-  //titleList.innerHTML = html;
 
   const links = document.querySelectorAll('.titles a');
   for(let link of links){
@@ -117,8 +116,6 @@ function generateTags(){
     allTagsHTML= allTagsHTML + tagLinkHTML;
     tagList.innerHTML = allTagsHTML;
   }
-
-  //tagList.innerHTML = allTagsHTML;
 }
 
 generateTags();
@@ -150,7 +147,6 @@ function tagClickHandler(event){
   generateTitleLinks('[data-tag~="' + tag + '"]');
 }
 
-
 function addClickListenersToTags(){
   /* [DONE] find all links to tags */
   const foundTagLinks = document.querySelectorAll('a[href^="#tag-"]');
@@ -160,7 +156,6 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
-
 
 function generateAuthors() {
   let allAuthors = {};
@@ -203,7 +198,7 @@ function authorClickHandler(event){
     authorLink.classList.remove('active');
   }
 
-  const foundAuthor = document.querySelectorAll('a[href="' + author + '"]');
+  const foundAuthor = document.querySelectorAll('a[href="' + href + '"]');
 
   for (let author of foundAuthor){
     author.classList.add('active');
