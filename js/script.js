@@ -188,7 +188,6 @@ function generateAuthors() {
     allAuthorsHTML += authorsLinkHTML;
     authorList.innerHTML = allAuthorsHTML;
   }
- //authorList.innerHTML = allAuthorsHTML;
 }
 
 generateAuthors();
@@ -213,7 +212,7 @@ function authorClickHandler(event){
 }
 
 function addClickListenersToAuthors(){
-  const foundAutorsLinks = document.querySelectorAll(('a[href^="#"]'));
+  const foundAutorsLinks = document.querySelectorAll(('a[href^="#author-"]'));
   for (let link of foundAutorsLinks) {
     link.addEventListener('click', authorClickHandler);
   }
