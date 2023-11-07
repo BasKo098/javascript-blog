@@ -45,8 +45,6 @@ function generateTitleLinks(customSelector = '') {
   for(let item of titleItems) {
     item.remove();
   }
-  console.log('to ten titile items');
-  console.log(titleItems);
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
   let html = '';
   for (let article of articles){
@@ -96,8 +94,8 @@ function generateTags(){
     const tagsWrapper = article.querySelector(optArticleTagsSelector);
     let html = '';
     const articleTags = article.getAttribute('data-tags');
-    const articleTagsArray = articleTags.split(' ');
 
+    const articleTagsArray = articleTags.split(' ');
     for (let tag of articleTagsArray){
       const linkHTML = '<li><a href="#tag-' + tag + '">' + tag  + '</a></li>';
       html += linkHTML;
@@ -147,8 +145,9 @@ function tagClickHandler(event){
   }
 
   /* [DONE] execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks('[data-tags~="' + tag + '"]'); //generateTitleLinks('[data-tags~="' + tag + '"]');
+  generateTitleLinks('[data-tag~="' + tag + '"]');
 }
+
 
 function addClickListenersToTags(){
   /* [DONE] find all links to tags */
@@ -183,7 +182,7 @@ function generateAuthors() {
   const authorsParams = calculateTagsParam(allAuthors);
   let allAuthorsHTML = '';
   for(let author in allAuthors) {
-    const authorsLinkHTML = '<li><a class="' + calculateTagClass(allAuthors[author], authorsParams) +' " href="#tag-' + author +'">'  + author +  '(' + allAuthors[author] + ')</a></li>';
+    const authorsLinkHTML = '<li><a class="' + calculateTagClass(allAuthors[author], authorsParams) +' " href="#author-' + author +'">'  + author +  '(' + allAuthors[author] + ')</a></li>';
     allAuthorsHTML += authorsLinkHTML;
     //authorList.innerHTML = allAuthorsHTML;
   }
