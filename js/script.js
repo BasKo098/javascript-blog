@@ -52,8 +52,9 @@ function generateTitleLinks(customSelector = '') {
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     html = html + linkHTML;
+    titleList.innerHTML = html;
   }
-  titleList.innerHTML = html;
+  //titleList.innerHTML = html;
 
   const links = document.querySelectorAll('.titles a');
   for(let link of links){
@@ -114,9 +115,10 @@ function generateTags(){
   for(let tag in allTags){
     const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) +' " href="#tag-' + tag +'">'  + tag + ' (' + allTags[tag] + ')</a></li>';
     allTagsHTML= allTagsHTML + tagLinkHTML;
+    tagList.innerHTML = allTagsHTML;
   }
 
-  tagList.innerHTML = allTagsHTML;
+  //tagList.innerHTML = allTagsHTML;
 }
 
 generateTags();
@@ -184,9 +186,9 @@ function generateAuthors() {
   for(let author in allAuthors) {
     const authorsLinkHTML = '<li><a class="' + calculateTagClass(allAuthors[author], authorsParams) +' " href="#author-' + author +'">'  + author +  '(' + allAuthors[author] + ')</a></li>';
     allAuthorsHTML += authorsLinkHTML;
-    //authorList.innerHTML = allAuthorsHTML;
+    authorList.innerHTML = allAuthorsHTML;
   }
-  authorList.innerHTML = allAuthorsHTML;
+ //authorList.innerHTML = allAuthorsHTML;
 }
 
 generateAuthors();
